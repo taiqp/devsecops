@@ -2,10 +2,24 @@ pipeline {
   agent any
 
   stages {
-      stage('Build Artifact') {
+       stage('Git version') {
             steps {
-              sh "mvn clean package -DskipTests=true"
-              archive 'target/*.jar' //so that they can be downloaded later
+              sh "git --version"
+            }
+        }   
+       stage('Jenkins version') {
+            steps {
+              sh "jenkins --version"
+            }
+        }   
+       stage('Docker version') {
+            steps {
+              sh "docker version"
+            }
+        }   
+       stage('Kubernetes version') {
+            steps {
+              sh "kubectl version --short "
             }
         }   
     }
