@@ -19,7 +19,7 @@ pipeline {
         }   
        stage('Kubernetes version') {
             steps {
-              sh "kubectl version --short "
+              sh "kubectl version --short"
             }
         }   
     }
