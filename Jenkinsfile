@@ -12,7 +12,7 @@ pipeline {
               sh "jenkins --version"
             }
         }   
-       stage('Docker version ') {
+       stage('Docker version') {
             steps {
               sh "docker version"
             }
