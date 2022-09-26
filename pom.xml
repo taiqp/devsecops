@@ -60,13 +60,11 @@
 				<version>0.8.5</version>
 				<executions>
 					<execution>
-						<id>agent-for-ut</id>
+						<id>agent-for-unit-test</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
-					</execution>
-				</executions>
-				<executions>
+					</execution>					
 					<execution>
 						<id>report</id>
 						<phase>test</phase>
