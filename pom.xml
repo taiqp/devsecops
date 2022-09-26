@@ -60,7 +60,6 @@
 				<version>0.8.5</version>
 				<executions>
 					<execution>
-						<id>agent-for-unit-test</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
