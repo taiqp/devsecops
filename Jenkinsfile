@@ -45,7 +45,7 @@ pipeline {
 
        stage('Docker build and push') {
             steps {
-              docker.withRegistry([url:"", credentialsId: "dockerhub"]) {
+              withDockerRegistry([url:"", credentialsId: "dockerhub"]) {
                 // sh "docker version"
                 sh "printenv"
                 sh 'docker build -t taiqp/numeric-app:1.""$BUILD_ID""'
