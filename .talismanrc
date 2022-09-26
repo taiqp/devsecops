@@ -1,3 +1,4 @@
 fileignoreconfig:
-- filename: username.txt
-  checksum: 0fcbe7b2553bfb0e960075fb2a76daa22eb9594d7578df54e5ea2693e0383e63
+- filename: kubeconfig
+  checksum: c48ff0e296554a1400178524aae41bec308d462c3fcb0aaae69aa85897b7f253
+
