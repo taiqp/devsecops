@@ -52,7 +52,7 @@ pipeline {
 
        stage('Vulnerabitilites Scan') {
             steps {
-              paralel{
+              parallel{
                 "Dependency Check" : {
                   // sh "mvn dependency-check:check"
                   echo "mvn dependency-check:check"
