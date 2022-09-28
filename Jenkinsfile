@@ -98,7 +98,7 @@ pipeline {
               withDockerRegistry([url:"", credentialsId: "dockerhub"]) {
                 // sh "docker version"
                 sh "printenv"
-                sh 'docker build -t taiqp/numeric-app:1.""$BUILD_ID"" .'
+                sh 'sudo docker build -t taiqp/numeric-app:1.""$BUILD_ID"" .'
                 sh 'docker push taiqp/numeric-app:1.""$BUILD_ID""'
               }
             }
