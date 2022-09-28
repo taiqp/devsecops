@@ -3,7 +3,7 @@
 ## Description
 
 The system has 02 components:
-- One NodeJS service, available on Docker Hub: taiqp/node-service, which has some functions. To run it, we just need to deploy a deployment and a service on K8s cluster (open port: 5000)
+- One NodeJS service, available on Docker Hub: taiqp/node-service, which plays one function: plus 1 to the number on url. To run it, we just need to deploy a deployment and a service on K8s cluster (open port: 5000)
 `docker run -p 5000:5000 taiqp/node-service:v1`
 Function: +1 for any call
 
