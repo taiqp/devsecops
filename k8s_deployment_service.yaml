@@ -1,5 +1,4 @@
 
-############### Updated k8s_deployment_service.yaml ############### 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,12 +16,14 @@ spec:
       labels:
         app: devsecops
     spec:
+      serviceAccountName: default
       containers:
       - image: replace
         name: devsecops-container
         securityContext:
           runAsNonRoot: true
           runAsUser: 100
+          readOnlyRootFilesystem: true
 ---
 apiVersion: v1
 kind: Service
