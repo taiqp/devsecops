@@ -66,4 +66,6 @@ docker run --rm -v $WORKSPACE:/root/.cache/ bitnami/trivy:latest -q image --exit
 
   * Trivy: scan own image before deploying for any critical vulnerablities. Here it found one, but need to update pom.xml, which is out of scope of DevOps engineer.
 
-09. Intergration Test: check the link with NodePort
+09. Deploy on Kubernetes
+
+11. Intergration Test: check the link with NodePort
