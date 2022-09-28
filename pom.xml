@@ -100,7 +100,7 @@
 				<version>6.1.6</version>
 				<configuration>
 					<format>ALL</format>
-                    <failBuilsOnCVSS>5</failBuilsOnCVSS>
+                    <failBuildOnCVSS>5</failBuildOnCVSS>
                 </configuration>
 			</plugin>
 
