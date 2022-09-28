@@ -6,7 +6,7 @@ pipeline {
     containerName = "devsecops-container"
     serviceName = "devsecops-svc"
     imageName = "taiqp/numeric-app:1.${BUILD_ID}"
-    applicationURL = "http://devsecops-demo.eastus.cloudapp.azure.com"
+    applicationURL = "http://devsecops.westeurope.cloudapp.azure.com"
     applicationURI = "increment/99"
   }
   stages {
@@ -113,7 +113,7 @@ pipeline {
 
             "Kubesec scan": {
                 sh "bash kubesec-scan.sh"
-            }            ,
+            } ,
             
             "Trivy scan our own image": {
                   sh "bash trivy_scan_k8s_image.sh"
