@@ -37,6 +37,12 @@ pipeline {
             }
         }   
 
+        stage('PIT Mutation Test') {
+            steps {
+              sh "mvn org.pitest:pitest-maven:mutationCoverage"
+            }
+        }   
+        
        stage('SAST - Sonarqube') {
             steps {
               withSonarQubeEnv('SonarQube')  {
@@ -67,11 +73,6 @@ pipeline {
             }
         }    
 
-        stage('PIT Mutation Test') {
-            steps {
-              sh "mvn org.pitest:pitest-maven:mutationCoverage"
-            }
-        }   
 
        stage('Docker build and push') {
             steps {
