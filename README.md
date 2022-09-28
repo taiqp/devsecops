@@ -38,13 +38,17 @@ timeout(time: 2, unit: 'MINUTES') {
 }
 
 06. Check some vulnerabilities:
+
+
   06.1. Dependency-check plugin to check any outdated dependencies
                     echo "mvn dependency-check:check"
+                    
 
   06.2. Trivy to scan the base image on Dockerfile for any critical CVE
                     sh "bash trivy_scan_base_image.sh"
 docker run --rm -v $WORKSPACE:/root/.cache/ bitnami/trivy:latest -q image --exit-code 0 --severity HIGH --light $dockerImageName
 docker run --rm -v $WORKSPACE:/root/.cache/ bitnami/trivy:latest -q image --exit-code 1 --severity CRITICAL --light $dockerImageName
+
 
   06.3. OPA Conftest to scan the Dockerfile before build (using rego language file)
                    sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy OPA_Conftest.rego Dockerfile'
