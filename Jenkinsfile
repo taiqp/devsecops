@@ -68,8 +68,8 @@ pipeline {
 
                 "Trivy Scans Base Image" : {
                   sh "bash trivy_scan_base_image.sh"
-                }
-                
+                },
+                                
                 "OPA Conftest Scans our Dockerfile" : {
                   sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-docker-security.rego Dockerfile'
                 }
