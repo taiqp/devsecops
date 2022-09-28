@@ -5,6 +5,10 @@
 The system has 02 components:
 - One NodeJS service, available on Docker Hub: taiqp/node-service, which has some functions. To run it, we just need to deploy a deployment and a service on K8s cluster (open port: 5000)
 `docker run -p 5000:5000 taiqp/node-service:v1`
+Function: +1 for any call
+
+http://node-service:5000/plusone
+
 - A Java application to call NodeJS service on port 5000. 
 
 The pipeline focus on building steps for Java application
@@ -56,4 +60,6 @@ docker run --rm -v $WORKSPACE:/root/.cache/ bitnami/trivy:latest -q image --exit
   * Kubesec: Call API kubesec to scan the yaml file
   scan_result=$(curl -sSX POST --data-binary @"k8s_deployment_service.yaml" https://v2.kubesec.io/scan)
 
-  * Trivy
+  * Trivy: scan own image before deploying for any critical vulnerablities. Here it found one, but need to update pom.xml, which is out of scope of DevOps engineer.
+
+09. Intergration Test: check the link with NodePort

@@ -6,8 +6,8 @@ pipeline {
     containerName = "devsecops-container"
     serviceName = "devsecops-svc"
     imageName = "taiqp/numeric-app:1.${BUILD_ID}"
-    applicationURL = "http://devsecops-demo.eastus.cloudapp.azure.com/"
-    applicationURI = "/increment/99"
+    applicationURL = "http://devsecops-demo.eastus.cloudapp.azure.com"
+    applicationURI = "increment/99"
   }
   stages {
       //  stage('Git version') {
