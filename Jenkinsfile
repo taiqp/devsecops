@@ -1,6 +1,14 @@
 pipeline {
   agent any
 
+  environment {
+    deploymentName = "devsecops"
+    containerName = "devsecops-container"
+    serviceName = "devsecops-svc"
+    imageName = "taiqp/numeric-app:1.${BUILD_ID}"
+    applicationURL = "http://devsecops-demo.eastus.cloudapp.azure.com/"
+    applicationURI = "/increment/99"
+  }
   stages {
       //  stage('Git version') {
       //       steps {
@@ -102,12 +110,29 @@ pipeline {
         }
       }
 
+      stage('K8S Deployment - DEV') {
+        steps {
+          parallel(
+            "Deployment": {
+              withKubeConfig([credentialsId: 'kubeconfig']) {
+                sh "bash k8s-deployment.sh"
+              }
+            },
+            "Rollout Status": {
+              withKubeConfig([credentialsId: 'kubeconfig']) {
+                sh "bash k8s-deployment-rollout-status.sh"
+              }
+            }
+          )
+        }
+      }
+
        stage('Kubernetes deploy - Dev') {
             steps {
               withKubeConfig([credentialsId: 'kubeconfig']) {
                 sh "sed -i 's#replace#taiqp/numeric-app:1.${BUILD_ID}#g' k8s_deployment_service.yaml"
                 sh "kubectl apply -f k8s_deployment_service.yaml"
-              }              
+              }
             }
         }   
     }
