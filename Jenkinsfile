@@ -92,13 +92,12 @@ pipeline {
             }
         }    
 
-
        stage('Docker build and push') {
             steps {
               withDockerRegistry([url:"", credentialsId: "dockerhub"]) {
                 // sh "docker version"
                 sh "printenv"
-                sh 'sudo docker build -t taiqp/numeric-app:1.""$BUILD_ID"" .'
+                sh 'docker build -t taiqp/numeric-app:1.""$BUILD_ID"" .'
                 sh 'docker push taiqp/numeric-app:1.""$BUILD_ID""'
               }
             }
@@ -140,15 +139,24 @@ pipeline {
         }
       }
 
-       stage('Kubernetes deploy - Dev') {
-            steps {
-              withKubeConfig([credentialsId: 'kubeconfig']) {
-                sh "sed -i 's#replace#taiqp/numeric-app:1.${BUILD_ID}#g' k8s_deployment_service.yaml"
-                sh "kubectl apply -f k8s_deployment_service.yaml"
-              }
+      
+    stage('Integration Tests - DEV') {
+      steps {
+        script {
+          try {
+            withKubeConfig([credentialsId: 'kubeconfig']) {
+              sh "bash integration-test.sh"
             }
-        }   
+          } catch (e) {
+            withKubeConfig([credentialsId: 'kubeconfig']) {
+              sh "kubectl -n default rollout undo deploy ${deploymentName}"
+            }
+            throw e
+          }
+        }
+      }
     }
+
     post {
       always {
         junit 'target/surefire-reports/*.xml'
