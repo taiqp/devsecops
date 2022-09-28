@@ -43,6 +43,18 @@ pipeline {
             }
         }   
 
+       stage('SAST - Sonarqube') {
+            steps {
+              sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-app -Dsonar.host.url=http://20.229.193.34:9000 -Dsonar.login=sqp_04f50064f13d4621a968d761d01317493a345547"
+            }
+            post {
+              always {
+                junit 'target/surefire-reports/*.xml'
+                jacoco execPattern: 'target/jacoco.exec'
+              }
+            }
+        }   
+
         stage('PIT Mutation Test') {
             steps {
               sh "mvn org.pitest:pitest-maven:mutationCoverage"
