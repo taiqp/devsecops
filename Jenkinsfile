@@ -111,7 +111,7 @@ pipeline {
             "OPA Scan" :{
               sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy OPA_Conftest_Yaml_test.rego k8s_deployment_service.yaml'
             },
-            
+
             "Kubesec scan": {
                 sh "bash kubesec-scan.sh"
             }            
