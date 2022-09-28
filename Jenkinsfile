@@ -67,7 +67,7 @@ pipeline {
                 },
 
                 "Trivy Scans Base Image" : {
-                  sh "sudo bash trivy_scan_base_image.sh"
+                  sh "bash trivy_scan_base_image.sh"
                 },
 
                 "OPA Conftest Scans our Dockerfile" : {
