@@ -35,12 +35,6 @@ pipeline {
             steps {
               sh "mvn test"
             }
-            post {
-              always {
-                junit 'target/surefire-reports/*.xml'
-                jacoco execPattern: 'target/jacoco.exec'
-              }
-            }
         }   
 
        stage('SAST - Sonarqube') {
@@ -60,21 +54,11 @@ pipeline {
             steps {
               sh "mvn dependency-check:check"
             }
-            post {
-              always {
-                dependencyCheckPublisher pattern:"target/dependency-check-report.xml"
-              }
-            }
         }    
 
         stage('PIT Mutation Test') {
             steps {
               sh "mvn org.pitest:pitest-maven:mutationCoverage"
-            }
-            post {
-              always {
-                pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
-              }
             }
         }   
 
@@ -97,5 +81,13 @@ pipeline {
               }              
             }
         }   
+    }
+    post {
+      always {
+        junit 'target/surefire-reports/*.xml'
+        jacoco execPattern: 'target/jacoco.exec'
+        pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
+        dependencyCheckPublisher pattern:"target/dependency-check-report.xml"
+      }
     }
 }
