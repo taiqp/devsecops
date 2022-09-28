@@ -114,7 +114,11 @@ pipeline {
 
             "Kubesec scan": {
                 sh "bash kubesec-scan.sh"
-            }            
+            }            ,
+            
+            "Trivy scan our own image": {
+                  sh "bash trivy_scan_k8s_image.sh"
+            }         
           )
         }          
       }
